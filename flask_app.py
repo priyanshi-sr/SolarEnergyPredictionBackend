@@ -1,17 +1,21 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import requests
 import pandas as pd
 import joblib
 import datetime
 
+
 API_KEY = 'API_KEY'
 
 app = Flask(__name__)
+CORS(app)
 features = ['Temperature', 'Pressure', 'Humidity', 'WindDirection(Degrees)', 'Speed']
 model = joblib.load('model.joblib')
 
 
 @app.route('/Radiation', methods=['POST'])
+@cross_origin()
 def Radiation():
     date = request.json.get('date')
     time = request.json.get('time')  # eg: 12:45
