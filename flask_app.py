@@ -38,7 +38,8 @@ def Radiation():
 
     hour = time.split(':')[0]
     data = requests.get(
-        f'https://api.weatherapi.com/v1/{api}.json?key={API_KEY}&q={city if city else '27.4924,77.6737'}&dt={date}').json()
+        f'https://api.weatherapi.com/v1/{api}.json?key={API_KEY}&q={city if city else "27.4924,77.6737"}&dt={date}').json()
+
     if 'error' in data:
         return jsonify(data)
     dataTime = data['forecast']['forecastday'][0]['hour'][int(hour)]
