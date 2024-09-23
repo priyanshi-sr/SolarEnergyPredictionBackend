@@ -4,9 +4,10 @@ import requests
 import pandas as pd
 import joblib
 import datetime
+import os
 
 
-API_KEY = 'API_KEY'
+API_KEY = os.environ.get('API_KEY')
 
 app = Flask(__name__)
 CORS(app)
