@@ -12,6 +12,24 @@ API_KEY = os.environ.get('API_KEY')
 app = Flask(__name__)
 CORS(app)
 features = ['Temperature', 'Pressure', 'Humidity', 'WindDirection(Degrees)', 'Speed']
+
+
+if not os.path.exists('model.joblib'):
+    url = os.environ.get('MODEL_URL')  # The URL of the file
+    file_name = "model.joblib"  # The name to save the file as
+
+    response = requests.get(url)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        with open(file_name, 'wb') as f:
+            f.write(response.content)
+        print(f"File downloaded successfully as {file_name}")
+    else:
+        print(f"Failed to download file. Status code: {response.status_code}")
+        exit()
+
+
 model = joblib.load('model.joblib')
 
 
